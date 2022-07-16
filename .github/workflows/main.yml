@@ -24,7 +24,7 @@ jobs:
       uses: microsoft/powerplatform-actions/export-solution@v0
       with:
         environment-url: 'https://org182934f0.crm4.dynamics.com'
-        user-name: 'n.kapoor@degroofpetercam.com'
+        user-name: 'NK4024@degroofpetercam.com'
         password-secret: 'NewPen4455*'
         solution-name: aSolution
         solution-output-file: 'aSolution.zip'
@@ -42,7 +42,7 @@ jobs:
       uses: microsoft/powerplatform-actions/publish-solution@v0
       with:
         environment-url: 'https://org182934f0.crm4.dynamics.com'
-        user-name: 'n.kapoor@degroofpetercam.com'
+        user-name: 'NK4024@degroofpetercam.com'
         password-secret: 'NewPen4455*'
 
     - name: Prepare solution changes for check-in into source control
