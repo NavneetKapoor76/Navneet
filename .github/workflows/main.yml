@@ -1,0 +1,53 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "master" branch
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+
+    runs-on: windows-latest   # alternate runner OS is: ubuntu-latest
+
+    steps:
+    - name: Export Solution
+      uses: microsoft/powerplatform-actions/export-solution@v0
+      with:
+        environment-url: 'https://orgddb94e34.crm4.dynamics.com'
+        user-name: 'navneet_kapoor76@rediffmail.com'
+        password-secret: 'NewPen4455*'
+        solution-name: aSolution
+        solution-output-file: 'aSolution.zip'
+        working-directory: 'out'
+
+    - name: Unpack Solution
+      uses: microsoft/powerplatform-actions/unpack-solution@v0
+      with:
+        solution-file: 'out/aSolution1.zip'
+        solution-folder: 'out/solutions/solution one'
+        solution-type: 'Unmanaged'
+        overwrite-files: true
+
+    - name: Publish Solution
+      uses: microsoft/powerplatform-actions/publish-solution@v0
+      with:
+        environment-url: 'https://orgddb94e34.crm4.dynamics.com'
+        user-name: 'navneet_kapoor76@rediffmail.com'
+        password-secret: 'NewPen4455*'
+
+    - name: Prepare solution changes for check-in into source control
+      uses: microsoft/powerplatform-actions/branch-solution@v0
+      with:
+        solution-folder: 'out/solutions/solution one'
+        solution-target-folder: 'src/solutions/solution1'
+        token: ${{ secrets.GITHUB_TOKEN }}
